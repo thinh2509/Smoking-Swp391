@@ -7,62 +7,38 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import smoking.member.MemberDAO;
-import smoking.member.MemberDTO;
 
 /**
  *
  * @author Thinkpad
  */
-public class LoginController extends HttpServlet {
-    private static final String LOGIN_PAGE = "login.jsp"; //if error
-    private static final String HOME_PAGE = "home_member.jsp";//if valid
+@WebServlet(name = "MainController", urlPatterns = {"/MainController"})
+public class MainController extends HttpServlet {
+    private final String HOME_PAGE = "index.html";
+    private final String LOGIN_PAGE = "login.jsp";
+    private final String HOME_MEMBER_PAGE = "LoginController";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String IDMember = request.getParameter("txtMember");
-        String password = request.getParameter("txtPassword");
-        String url = LOGIN_PAGE;
-        boolean hasError = false;
+        String button = request.getParameter("btAction");
+        String url = HOME_PAGE;
         try {
-            if(IDMember == null || IDMember.trim().isEmpty()){
-                request.setAttribute("ERROR_MEMBERNAME", "IDMember is required");
-                hasError = true;
+            if(button==null){
+                url = LOGIN_PAGE;
             }
-            if(password == null || password.trim().isEmpty()){
-                request.setAttribute("ERROR_PASSWORD", "Password is required");
-                hasError = true;
+            else if(button.equals("Login")){
+                url = HOME_MEMBER_PAGE;
             }
-            if (hasError) {
-                RequestDispatcher rd = request.getRequestDispatcher(url);
-                rd.forward(request, response);
-                return;
-            }
-            MemberDAO dao = new MemberDAO();
-            MemberDTO member = dao.checkLogin(IDMember, password);
-            if (member != null) {
-                HttpSession session = request.getSession(true);
-                session.setAttribute("MEMBER", member);
-                url = HOME_PAGE;
-            }else {
-                request.setAttribute("ERROR", "Incorrect UserID or Password");
-            }
-            
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } catch (ClassNotFoundException ex) {
-            ex.printStackTrace();
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
-        }       
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

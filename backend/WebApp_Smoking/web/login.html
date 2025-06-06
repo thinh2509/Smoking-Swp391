@@ -29,7 +29,7 @@
                     <div class="inner-login">
                         <div class="inner-box">
                             <h3 class="inner-title">Sign In</h3>
-                            <form action="" class="form-login">
+                            <form action="" class="form-login" method="POST">
                                 <label for="role" class="item-name">Select Role</label><br>
                                 <div class="select-wrapper">
                                     <select class="inner-option" id="role" name="role">
@@ -38,18 +38,18 @@
                                     </select>
                                 </div>
 
-                                <label for="username" class="item-name">User Name</label><br>
+                                <label for="IDMember" class="item-name">User Name</label><br>
                                 <div class="inner-input">
-                                    <input type="text" id="username" name="username" placeholder="User Name">
+                                    <input type="text" id="IDMember" name="txtMember" placeholder="ID member">
                                 </div>
 
                                 <label for="password" class="item-name">Password</label><br>
                                 <div class="inner-input">
-                                    <input type="password" id="password" name="password" placeholder="Password">
+                                    <input type="password" id="password" name="txtPassword" placeholder="Password">
                                 </div>
 
                                 <div class="inner-button">
-                                    <button type="submit" class="button">Login</button>
+                                    <button type="submit" class="button" name="btAction" value="Login">Login</button>
                                 </div>
                                 <!-- Remember Me + Forgot Password -->
                                 <div class="inner-options">

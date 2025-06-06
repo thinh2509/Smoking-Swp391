@@ -12,19 +12,38 @@ import java.sql.Date;
  *
  * @author Thinkpad
  */
-public class MemberDTO implements Serializable{
+public class MemberDTO implements Serializable {
+
     private String IDMember;
     private String password;
     private String memberName;
     private String phone;
     private String email;
     private String address;
-    private Date date;
+    private Date dateOfBirth;
     private Date joinDate;
     private String image;
     private String IDCoach;
     private String subcription;
     private String status;
+
+    public MemberDTO() {
+    }
+
+    public MemberDTO(String IDMember, String password, String memberName, String phone, String email, String address, Date dateOfBirth, Date joinDate, String image, String IDCoach, String subcription, String status) {
+        this.IDMember = IDMember;
+        this.password = password;
+        this.memberName = memberName;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.dateOfBirth = dateOfBirth;
+        this.joinDate = joinDate;
+        this.image = image;
+        this.IDCoach = IDCoach;
+        this.subcription = subcription;
+        this.status = status;
+    }
 
     /**
      * @return the IDMember
@@ -111,17 +130,17 @@ public class MemberDTO implements Serializable{
     }
 
     /**
-     * @return the date
+     * @return the dateOfBirth
      */
-    public Date getDate() {
-        return date;
+    public Date getDateOfBirth() {
+        return dateOfBirth;
     }
 
     /**
-     * @param date the date to set
+     * @param dateOfBirth the dateOfBirth to set
      */
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
     /**
@@ -193,6 +212,7 @@ public class MemberDTO implements Serializable{
     public void setStatus(String status) {
         this.status = status;
     }
+
     
-    
+
 }

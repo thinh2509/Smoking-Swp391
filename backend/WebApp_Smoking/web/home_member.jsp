@@ -1,3 +1,10 @@
+<%-- 
+    Document   : home_member
+    Created on : Jun 6, 2025, 2:37:54 PM
+    Author     : Thinkpad
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
     <!doctype html>
     <html lang="en">
 
@@ -85,10 +92,6 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div class="inner-button">
-                                <a href="login.jsp" target="_blank" class="button button-one">Sign In</a>
-                                <a href="register.jsp" target="_blank" class="button button-two">Sign Up</a>
-                            </div>
                             <div class="inner-notification">
                                 <a href="#"><i class="fa-solid fa-bell"></i></a>
                             </div>
@@ -96,6 +99,9 @@
                                 <a href="">
                                     <i class="fa-solid fa-user"></i>
                                 </a>
+                                <span class="name-member">
+                                    ${sessionScope.MEMBER.memberName}
+                                </span>
                             </div>
                         </div>
                     </div>
