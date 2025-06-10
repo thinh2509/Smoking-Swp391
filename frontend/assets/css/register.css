@@ -48,3 +48,8 @@ body {
 .btn-green:hover {
     background-color: #388e3c;
 }
+
+.register-form .inner-form .inner-form-gender {
+    display: flex;
+    gap: 20px;
+}

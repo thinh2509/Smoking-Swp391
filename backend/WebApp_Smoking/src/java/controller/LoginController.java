@@ -48,6 +48,7 @@ public class LoginController extends HttpServlet {
             MemberDAO dao = new MemberDAO();
             MemberDTO member = dao.checkLogin(IDMember, password);
             if (member != null) {
+                
                 HttpSession session = request.getSession(true);
                 session.setAttribute("MEMBER", member);
                 url = HOME_PAGE;
