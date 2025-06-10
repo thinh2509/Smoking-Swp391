@@ -5,8 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-    <!doctype html>
-    <html lang="en">
+<!doctype html>
+<html lang="en">
 
     <head>
         <!-- Required meta tags -->
@@ -15,14 +15,14 @@
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
-            integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+              integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-            integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
-            crossorigin="anonymous" referrerpolicy="no-referrer" />
+              integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+              crossorigin="anonymous" referrerpolicy="no-referrer" />
 
         <title>Home Page</title>
         <link rel="stylesheet" href="assets/css/style.css">
-        
+
     </head>
 
     <body>
@@ -31,11 +31,11 @@
 
         <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-            crossorigin="anonymous"></script>
+                integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
-            crossorigin="anonymous"></script>
+                integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+        crossorigin="anonymous"></script>
         <!-- Header -->
         <header class="header">
             <div class="container">
@@ -92,16 +92,28 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div class="inner-notification">
+                            <%--<div class="inner-notification">
                                 <a href="#"><i class="fa-solid fa-bell"></i></a>
                             </div>
                             <div class="inner-profile">
                                 <a href="">
                                     <i class="fa-solid fa-user"></i>
                                 </a>
-                                <span class="name-member">
+                                <span class="name-member" style="margin-left: 10px">
                                     ${sessionScope.MEMBER.memberName}
                                 </span>
+                            </div>
+                            --%>
+                            <div class="inner-profile">
+                                <a href="#" class="icon-user">
+                                    <i class="fa-solid fa-user"></i>
+                                </a>
+                                <span class="name-member" style="margin-left: 10px">
+                                    ${sessionScope.MEMBER.memberName}
+                                </span>
+                            </div>
+                            <div class="inner-notification">
+                                <a href="#"><i class="fa-solid fa-bell"></i></a>                               
                             </div>
                         </div>
                     </div>
@@ -277,4 +289,4 @@
         <!-- End Footer -->
     </body>
 
-    </html>
+</html>

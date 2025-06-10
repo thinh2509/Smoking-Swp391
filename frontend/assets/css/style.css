@@ -129,6 +129,10 @@ body {
 .menu .inner-header .inner-name span {
     color: #28a745;
 }
+
+.menu .inner-header .inner-profile {
+    margin-right: 40px;
+}
 /* End Menu */
 
 /* Background */
