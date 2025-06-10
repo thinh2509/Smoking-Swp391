@@ -1,3 +1,10 @@
+<%-- 
+    Document   : register
+    Created on : Jun 8, 2025, 5:06:01 PM
+    Author     : Thinkpad
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="en">
   <head>
@@ -21,10 +28,10 @@
         <div class="container">
             <div class="inner-form">
                 <h2 class="inner-title">Register</h2>
-                <form action="MainController" method="post">
+                <form action="MainController" method="POST">
                     <div class="form-group">
-                        <label for="idmember">ID Member</label>
-                        <input type="text" class="form-control" name="txtIdmember" required>
+                        <label for="fullname">Full Name</label>
+                        <input type="text" class="form-control" name="txtFullname" required>
                     </div>
 
                     <div class="form-group">
@@ -48,7 +55,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="phone">Adress</label>
+                        <label for="phone">Address</label>
                         <textarea name="txtAdress" class="form-control" rows="2" required></textarea>
                     </div>
 
@@ -57,7 +64,7 @@
                         <input type="date" class="form-control" name="txtDob" required>
                     </div>
 
-                    <button type="submit" class="btn btn-green btn-block">Register</button>
+                    <button type="submit" class="btn btn-green btn-block" value="Create New Account">Register</button>
                 </form>
             </div>
         </div>
