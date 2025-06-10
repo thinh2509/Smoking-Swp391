@@ -83,12 +83,12 @@
                                     %>
                                     <!-- Remember Me + Forgot Password -->
                                     <div class="inner-options">
-                                        <label class="item-name">
-                                            <input type="checkbox" name="remember">
-                                            Remember Me
-                                        </label>
-                                        <a href="#">Forgot Password?</a>
-                                    </div>
+                                    <label class="item-name" for="remember">
+                                        <input type="checkbox" name="remember" id="remember" value="true">
+                                        Remember Me
+                                    </label>
+                                    <a href="#">Forgot Password?</a>
+                                </div>
                                 </form>
                             </div>
                         </div>

@@ -122,7 +122,6 @@ public class MemberDAO implements Serializable {
                     String status = rs.getString("status");
                     dto = new MemberDTO(IDMember, password, memberName, gender, phone, email, address, dateOfBirth, joinDate, image, IDCoach, subcription, status);
                 }
-
             }
         } finally {
             if (rs != null) {

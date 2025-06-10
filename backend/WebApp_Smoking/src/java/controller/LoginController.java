@@ -31,6 +31,7 @@ public class LoginController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String IDMember = request.getParameter("txtMember");
         String password = request.getParameter("txtPassword");
+        String remember = request.getParameter("remember");
         String url = LOGIN_PAGE;
         boolean hasError = false;
         try {
@@ -50,20 +51,31 @@ public class LoginController extends HttpServlet {
             MemberDAO dao = new MemberDAO();
             MemberDTO member = dao.checkLogin(IDMember, password);
             if (member != null) {
-                // create token
-                String token = UUID.randomUUID().toString();
-                // call method of Model
-                // new DAO
-                // call DAO
-                dao.saveLoginToken(IDMember, token);
-                // Create cookie
-                Cookie cookie = new Cookie("login_token", token);
-                cookie.setMaxAge(60 * 3);
-                response.addCookie(cookie);
+//                // create token
+//                String token = UUID.randomUUID().toString();
+//                // call method of Model
+//                // new DAO
+//                // call DAO
+//                dao.saveLoginToken(IDMember, token);
+//                // Create cookie
+//                Cookie cookie = new Cookie("login_token", token);
+//                cookie.setMaxAge(60 * 3);
+//                response.addCookie(cookie);
                 // create session
                 HttpSession session = request.getSession(true);
                 session.setAttribute("MEMBER", member);
                 url = HOME_PAGE;
+                if("true".equals(remember)) { // click checkbox remember
+                    String token = UUID.randomUUID().toString();
+                    dao.saveLoginToken(IDMember, token);
+                    // Create cookie
+                    Cookie cookie = new Cookie("login_token", token);
+                    cookie.setMaxAge(60 * 3); // 3 minutes
+                    response.addCookie(cookie);
+                }else{ // don't click checkbox remember
+                    dao.saveLoginToken("login_token", null);
+                }
+                
             }else {
                 request.setAttribute("ERROR", "Incorrect UserID or Password");
             }
