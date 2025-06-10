@@ -8,9 +8,8 @@ package controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.UUID;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,59 +22,46 @@ import smoking.member.MemberDTO;
  *
  * @author Thinkpad
  */
-public class LoginController extends HttpServlet {
-    private static final String LOGIN_PAGE = "login.jsp"; //if error
-    private static final String HOME_PAGE = "home_member.jsp";//if valid
+@WebServlet(name = "CheckCookiesServlet", urlPatterns = {"/CheckCookiesServlet"})
+public class CheckCookiesServlet extends HttpServlet {
+
+    private final String LOGIN_PAGE = "login.jsp";
+    private final String HOME_PAGE = "home_member.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String IDMember = request.getParameter("txtMember");
-        String password = request.getParameter("txtPassword");
         String url = LOGIN_PAGE;
-        boolean hasError = false;
         try {
-            if(IDMember == null || IDMember.trim().isEmpty()){
-                request.setAttribute("ERROR_MEMBERNAME", "IDMember is required");
-                hasError = true;
-            }
-            if(password == null || password.trim().isEmpty()){
-                request.setAttribute("ERROR_PASSWORD", "Password is required");
-                hasError = true;
-            }
-            if (hasError) {
-                RequestDispatcher rd = request.getRequestDispatcher(url);
-                rd.forward(request, response);
-                return;
-            }
-            MemberDAO dao = new MemberDAO();
-            MemberDTO member = dao.checkLogin(IDMember, password);
-            if (member != null) {
-                // create token
-                String token = UUID.randomUUID().toString();
-                // call method of Model
-                // new DAO
-                // call DAO
-                dao.saveLoginToken(IDMember, token);
-                // Create cookie
-                Cookie cookie = new Cookie("login_token", token);
-                cookie.setMaxAge(60 * 3);
-                response.addCookie(cookie);
-                // create session
-                HttpSession session = request.getSession(true);
-                session.setAttribute("MEMBER", member);
-                url = HOME_PAGE;
-            }else {
-                request.setAttribute("ERROR", "Incorrect UserID or Password");
-            }
-            
+            // 1. Get all cookies
+            Cookie[] cookies = request.getCookies();
+            String token = null;
+            // 2. check existed cookies
+            if(cookies != null){
+                for(Cookie cookie : cookies) {
+                    if("login_token".equals(cookie.getName())){
+                        token = cookie.getValue();
+                        break;
+                    }
+                }
+            }// End cookies have EXISTED
+            if (token != null) {
+                MemberDAO dao = new MemberDAO();
+                MemberDTO result = dao.checkLoginByToken(token);
+                if (result != null) {
+                    HttpSession session = request.getSession();
+                    session.setAttribute("MEMBER", result);
+                    url = HOME_PAGE;
+                }
+            }// End token have EXISTED
         } catch (SQLException ex) {
             ex.printStackTrace();
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
-        } finally {
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
-        }       
+        }
+        finally {
+            // dùng cái gì cũng được tại vì cookie vẫn nằm trong file không mất luôn luôn tồn tại
+            response.sendRedirect(url);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -17,6 +17,7 @@ public class MemberDTO implements Serializable {
     private String IDMember;
     private String password;
     private String memberName;
+    private String gender;
     private String phone;
     private String email;
     private String address;
@@ -30,10 +31,11 @@ public class MemberDTO implements Serializable {
     public MemberDTO() {
     }
 
-    public MemberDTO(String IDMember, String password, String memberName, String phone, String email, String address, Date dateOfBirth, Date joinDate, String image, String IDCoach, String subcription, String status) {
+    public MemberDTO(String IDMember, String password, String memberName, String gender, String phone, String email, String address, Date dateOfBirth, Date joinDate, String image, String IDCoach, String subcription, String status) {
         this.IDMember = IDMember;
         this.password = password;
         this.memberName = memberName;
+        this.gender = gender;
         this.phone = phone;
         this.email = email;
         this.address = address;
@@ -85,6 +87,20 @@ public class MemberDTO implements Serializable {
      */
     public void setMemberName(String memberName) {
         this.memberName = memberName;
+    }
+
+    /**
+     * @return the gender
+     */
+    public String getGender() {
+        return gender;
+    }
+
+    /**
+     * @param gender the gender to set
+     */
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     /**
@@ -212,6 +228,8 @@ public class MemberDTO implements Serializable {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    
 
     
 
