@@ -29,7 +29,7 @@ public class LoginController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String IDMember = request.getParameter("txtMember");
+        String IDMember = request.getParameter("txtIdmember");
         String password = request.getParameter("txtPassword");
         String remember = request.getParameter("remember");
         String url = LOGIN_PAGE;
@@ -73,7 +73,7 @@ public class LoginController extends HttpServlet {
                     cookie.setMaxAge(60 * 3); // 3 minutes
                     response.addCookie(cookie);
                 }else{ // don't click checkbox remember
-                    dao.saveLoginToken("login_token", null);
+                    dao.saveLoginToken(IDMember, null);
                 }
                 
             }else {

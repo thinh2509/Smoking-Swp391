@@ -27,11 +27,12 @@ public class MemberDTO implements Serializable {
     private String IDCoach;
     private String subcription;
     private String status;
+    private String token;
 
     public MemberDTO() {
     }
 
-    public MemberDTO(String IDMember, String password, String memberName, String gender, String phone, String email, String address, Date dateOfBirth, Date joinDate, String image, String IDCoach, String subcription, String status) {
+    public MemberDTO(String IDMember, String password, String memberName, String gender, String phone, String email, String address, Date dateOfBirth, Date joinDate, String image, String IDCoach, String subcription, String status, String token) {
         this.IDMember = IDMember;
         this.password = password;
         this.memberName = memberName;
@@ -45,6 +46,7 @@ public class MemberDTO implements Serializable {
         this.IDCoach = IDCoach;
         this.subcription = subcription;
         this.status = status;
+        this.token = token;
     }
 
     /**
@@ -228,6 +230,24 @@ public class MemberDTO implements Serializable {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    /**
+     * @return the token
+     */
+    public String getToken() {
+        return token;
+    }
+
+    /**
+     * @param token the token to set
+     */
+    public void setToken(String token) {
+        this.token = token;
+    }
+    
+    
+
+    
 
     
 

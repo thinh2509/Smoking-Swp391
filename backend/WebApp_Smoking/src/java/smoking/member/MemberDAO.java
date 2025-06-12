@@ -28,7 +28,7 @@ public class MemberDAO implements Serializable {
             con = DBUtils.getConnection();
             if (con != null) {
                 String sql = "Select memberName, gender, phone, email, address, dateOfBirth, joinDate, "
-                        + "image, IDCoach, subcription, status "
+                        + "image, IDCoach, subcription, status, token "
                         + "From Member "
                         + "Where IDMember = ? "
                         + "And password = ? ";
@@ -48,7 +48,8 @@ public class MemberDAO implements Serializable {
                     String IDCoach = rs.getString("IDCoach");
                     String subcription = rs.getString("subcription");
                     String status = rs.getString("status");
-                    dto = new MemberDTO(IDMember, password, memberName, gender, phone, email, address, dateOfBirth, joinDate, image, IDCoach, subcription, status);
+                    String token = rs.getString("token");
+                    dto = new MemberDTO(IDMember, password, memberName, gender, phone, email, address, dateOfBirth, joinDate, image, IDCoach, subcription, status, token);
                 }
             }
         } finally {
@@ -99,7 +100,7 @@ public class MemberDAO implements Serializable {
             con = DBUtils.getConnection();
             if (con != null) {
                 String sql = "Select IDMember, password, memberName, gender, phone, email, address, dateOfBirth, joinDate, "
-                        + "image, IDCoach, subcription, status "
+                        + "image, IDCoach, subcription, status, token "
                         + "From Member "
                         + "Where token = ? ";
                 stm = con.prepareStatement(sql);
@@ -120,7 +121,7 @@ public class MemberDAO implements Serializable {
                     String IDCoach = rs.getString("IDCoach");
                     String subcription = rs.getString("subcription");
                     String status = rs.getString("status");
-                    dto = new MemberDTO(IDMember, password, memberName, gender, phone, email, address, dateOfBirth, joinDate, image, IDCoach, subcription, status);
+                    dto = new MemberDTO(IDMember, password, memberName, gender, phone, email, address, dateOfBirth, joinDate, image, IDCoach, subcription, status, token);
                 }
             }
         } finally {
@@ -135,5 +136,51 @@ public class MemberDAO implements Serializable {
             }
         }
         return dto; // Return the populated DTO
+    }
+
+    public boolean createAccount(MemberDTO account) throws SQLException, ClassNotFoundException {
+        boolean result = false;
+        Connection con = null;
+        PreparedStatement stm = null;
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "Insert into Member ("
+                        + "IDMember, password, memberName, gender, phone, email, address, dateOfBirth, joinDate, image, IDCoach, "
+                        + "subcription, status, token"
+                        + ") Values ("
+                        + "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? "
+                        + ")";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, account.getIDMember());
+                stm.setString(2, account.getPassword());
+                stm.setString(3, account.getMemberName());
+                stm.setString(4, account.getGender());
+                stm.setString(5, account.getPhone());
+                stm.setString(6, account.getEmail());
+                stm.setString(7, account.getAddress());
+                stm.setDate(8, new java.sql.Date(account.getDateOfBirth().getTime()));
+                stm.setDate(9, new java.sql.Date(account.getJoinDate().getTime()));
+                stm.setString(10, account.getImage());
+                stm.setString(11, account.getIDCoach());
+                stm.setString(12, account.getSubcription());
+                stm.setString(13, account.getStatus());
+                stm.setString(14, account.getToken());
+                //execute
+                int effectRows = stm.executeUpdate();
+                //proccess
+                if (effectRows > 0) {
+                    result = true;
+                }
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return result;
     }
 }

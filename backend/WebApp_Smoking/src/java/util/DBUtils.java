@@ -18,7 +18,7 @@ public class DBUtils {
         Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         String url = "jdbc:sqlserver://"
                 + "localhost:1433;"
-                + "databaseName=QuitSmokingDB_Test";
+                + "databaseName=QuitSmokingDB_Demo";
         Connection con = DriverManager.getConnection(url, "sa", "12345");
         return con;
     }

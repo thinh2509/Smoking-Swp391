@@ -45,10 +45,10 @@
                                         </select>
                                     </div>
 
-                                    <label for="IDMember" class="item-name">User Name</label><br>
+                                    <label for="IDMember" class="item-name">ID Member</label><br>
                                     <div class="inner-input">
-                                        <input type="text" id="IDMember" name="txtMember" placeholder="ID member"
-                                               value="<%= request.getParameter("txtMember") == null ? "" : request.getParameter("txtMember")%>">
+                                        <input type="text" id="IDMember" name="txtIdmember" placeholder="ID member"
+                                               value="<%= request.getParameter("txtIdmember") == null ? "" : request.getParameter("txtIdmember")%>">
                                     </div>
                                     <%
                                         if (request.getAttribute("ERROR_MEMBERNAME") != null) {
@@ -101,7 +101,7 @@
                                 </h2>
                                 <span class="inner-sub-title">Don't have an account?</span>
                                 <div class="inner-button">
-                                    <a href="#" class="button">Sign Up</a>
+                                    <a href="register.jsp" class="button">Sign Up</a>
                                 </div>
                             </div>
                         </div>

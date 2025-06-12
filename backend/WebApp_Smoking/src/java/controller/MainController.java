@@ -23,7 +23,7 @@ public class MainController extends HttpServlet {
     private final String HOME_PAGE = "index.html";
     private final String LOGIN_PAGE = "login.jsp";
     private final String HOME_MEMBER_PAGE = "LoginController";
-    private final String REGISTER_PAGE = "";
+    private final String REGISTER_PAGE = "CreateAccountServlet";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -37,7 +37,7 @@ public class MainController extends HttpServlet {
                 url = HOME_MEMBER_PAGE;
             }
             else if(button.equals("Create New Account")){
-                
+                url = REGISTER_PAGE;
             }
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
