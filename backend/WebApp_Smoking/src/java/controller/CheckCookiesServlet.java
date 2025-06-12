@@ -25,7 +25,7 @@ import smoking.member.MemberDTO;
 @WebServlet(name = "CheckCookiesServlet", urlPatterns = {"/CheckCookiesServlet"})
 public class CheckCookiesServlet extends HttpServlet {
 
-    private final String LOGIN_PAGE = "login.jsp";
+    private final String LOGIN_PAGE = "index.html";
     private final String HOME_PAGE = "home_member.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -44,6 +44,7 @@ public class CheckCookiesServlet extends HttpServlet {
                     }
                 }
             }// End cookies have EXISTED
+            // if find token in cookie
             if (token != null) {
                 MemberDAO dao = new MemberDAO();
                 MemberDTO result = dao.checkLoginByToken(token);

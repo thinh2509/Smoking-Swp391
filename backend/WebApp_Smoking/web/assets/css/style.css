@@ -130,6 +130,43 @@ body {
     color: #28a745;
 }
 
+.menu .inner-profile {
+    position: relative; /* Quan trọng: để menu thả xuống được định vị tương đối với wrapper này */
+    display: flex; /* Giúp căn chỉnh icon và tên */
+    align-items: center;
+}
+
+.profile-dropdown-menu {
+    display: none; /* Ban đầu ẩn menu */
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    top: 100%; /* Đặt menu bên dưới icon user */
+    right: 0; /* Căn phải với wrapper */
+    border-radius: 5px;
+    overflow: hidden; /* Đảm bảo góc bo tròn hoạt động tốt */
+}
+
+.profile-dropdown-menu a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+    font-size: 14px; /* Kích thước chữ nhỏ hơn cho các mục menu */
+    white-space: nowrap; /* Ngăn không cho chữ xuống dòng */
+}
+
+.profile-dropdown-menu a:hover {
+    background-color: #ddd;
+}
+
+/* Class để hiển thị menu khi active */
+.profile-dropdown-menu.show {
+    display: block;
+}
 /* End Menu */
 
 /* Background */

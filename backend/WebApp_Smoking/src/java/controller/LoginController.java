@@ -51,16 +51,6 @@ public class LoginController extends HttpServlet {
             MemberDAO dao = new MemberDAO();
             MemberDTO member = dao.checkLogin(IDMember, password);
             if (member != null) {
-//                // create token
-//                String token = UUID.randomUUID().toString();
-//                // call method of Model
-//                // new DAO
-//                // call DAO
-//                dao.saveLoginToken(IDMember, token);
-//                // Create cookie
-//                Cookie cookie = new Cookie("login_token", token);
-//                cookie.setMaxAge(60 * 3);
-//                response.addCookie(cookie);
                 // create session
                 HttpSession session = request.getSession(true);
                 session.setAttribute("MEMBER", member);

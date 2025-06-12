@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!doctype html>
 <html lang="en">
 
@@ -92,28 +93,28 @@
                                     </li>
                                 </ul>
                             </div>
-                            <%--<div class="inner-notification">
-                                <a href="#"><i class="fa-solid fa-bell"></i></a>
-                            </div>
+
                             <div class="inner-profile">
-                                <a href="">
-                                    <i class="fa-solid fa-user"></i>
-                                </a>
-                                <span class="name-member" style="margin-left: 10px">
-                                    ${sessionScope.MEMBER.memberName}
-                                </span>
-                            </div>
-                            --%>
-                            <div class="inner-profile">
-                                <a href="#" class="icon-user">
-                                    <i class="fa-solid fa-user"></i>
-                                </a>
-                                <span class="name-member" style="margin-left: 10px">
-                                    ${sessionScope.MEMBER.memberName}
-                                </span>
-                            </div>
-                            <div class="inner-notification">
-                                <a href="#"><i class="fa-solid fa-bell"></i></a>                               
+                                <c:choose>
+                                    <c:when test="${not empty sessionScope.MEMBER}">
+                                        <a href="#" class="icon-user" id="userIcon">
+                                            <i class="fa-solid fa-user"></i>
+                                        </a>
+                                        <span class="name-member" style="margin-left: 10px">
+                                            ${sessionScope.MEMBER.memberName}
+                                        </span>
+                                        <div class="profile-dropdown-menu" id="profileDropdown">
+                                            <a href="#">Profile</a>
+                                            <input type="submit" value="Logout" name="btAction" style="text-decoration: none" />
+                                        </div>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <div class="inner-button">
+                                            <a href="login.jsp" target="_blank" class="button button-one">Sign In</a>
+                                            <a href="register.jsp" target="_blank" class="button button-two">Sign Up</a>
+                                        </div>
+                                    </c:otherwise>
+                                </c:choose>
                             </div>
                         </div>
                     </div>
@@ -287,6 +288,27 @@
             </div>
         </footer>
         <!-- End Footer -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const userIcon = document.getElementById('userIcon');
+                const profileDropdown = document.getElementById('profileDropdown');
+                if (userIcon && profileDropdown) { // Chỉ chạy nếu các phần tử tồn tại
+                    userIcon.addEventListener('click', function (event) {
+                        event.preventDefault(); // Ngăn chặn hành vi mặc định của thẻ 'a' (chuyển hướng)
+                        profileDropdown.classList.toggle('show'); // Thêm hoặc gỡ bỏ lớp 'show'
+                    });
+
+                    // Đóng dropdown nếu click bên ngoài
+                    window.addEventListener('click', function (event) {
+                        if (userIcon && !userIcon.contains(event.target) && !profileDropdown.contains(event.target)) {
+                            if (profileDropdown.classList.contains('show')) {
+                                profileDropdown.classList.remove('show');
+                            }
+                        }
+                    });
+                }
+            })
+        </script>
     </body>
 
 </html>
