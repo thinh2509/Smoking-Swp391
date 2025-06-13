@@ -104,8 +104,8 @@
                                             ${sessionScope.MEMBER.memberName}
                                         </span>
                                         <div class="profile-dropdown-menu" id="profileDropdown">
-                                            <a href="#">Profile</a>
-                                            <input type="submit" value="Logout" name="btAction" style="text-decoration: none" />
+                                            <a href="user_profile.jsp">Profile</a>
+                                            <a href="MainController?btAction=Logout">Logout</a>
                                         </div>
                                     </c:when>
                                     <c:otherwise>
@@ -289,25 +289,20 @@
         </footer>
         <!-- End Footer -->
         <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                const userIcon = document.getElementById('userIcon');
-                const profileDropdown = document.getElementById('profileDropdown');
-                if (userIcon && profileDropdown) { // Chỉ chạy nếu các phần tử tồn tại
-                    userIcon.addEventListener('click', function (event) {
-                        event.preventDefault(); // Ngăn chặn hành vi mặc định của thẻ 'a' (chuyển hướng)
-                        profileDropdown.classList.toggle('show'); // Thêm hoặc gỡ bỏ lớp 'show'
-                    });
+            const userIcon = document.getElementById("userIcon");
+            const dropdown = document.getElementById("profileDropdown");
 
-                    // Đóng dropdown nếu click bên ngoài
-                    window.addEventListener('click', function (event) {
-                        if (userIcon && !userIcon.contains(event.target) && !profileDropdown.contains(event.target)) {
-                            if (profileDropdown.classList.contains('show')) {
-                                profileDropdown.classList.remove('show');
-                            }
-                        }
-                    });
+            userIcon.addEventListener("click", function (e) {
+                e.preventDefault();
+                dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+            });
+
+            // Ẩn dropdown khi bấm ngoài
+            document.addEventListener("click", function (e) {
+                if (!userIcon.contains(e.target) && !dropdown.contains(e.target)) {
+                    dropdown.style.display = "none";
                 }
-            })
+            });
         </script>
     </body>
 

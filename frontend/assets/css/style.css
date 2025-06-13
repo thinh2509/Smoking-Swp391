@@ -120,10 +120,10 @@ body {
 
 .menu .inner-notification a,
 .menu .inner-profile a {
+    padding: 10px;
     color: #232323;
     font-size: 20px;
     text-decoration: none;
-    margin-left: 15px;
 }
 
 .menu .inner-header .inner-name span {
@@ -133,7 +133,37 @@ body {
 .menu .inner-header .inner-profile {
     margin-right: 40px;
 }
+/* Dropdown  */
+.profile-dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: white;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    padding: 10px 20px;
+    border-radius: 6px;
+    right: 10;
+    top: 40px;
+    z-index: 9999;
+}
 
+.inner-profile {
+    position: relative;
+    display: inline-block;
+}
+
+.profile-dropdown-menu a {
+    padding: 0;
+    margin: 0;
+    display: block;
+    text-decoration: none;
+    color: black;
+}
+
+.profile-dropdown-menu a:hover {
+    background-color: #f0f0f0;
+}
+
+/* End Drop down */
 /* End Menu */
 
 /* Background */

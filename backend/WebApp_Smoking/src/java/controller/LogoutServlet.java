@@ -7,45 +7,46 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Thinkpad
  */
-@WebServlet(name = "MainController", urlPatterns = {"/MainController"})
-public class MainController extends HttpServlet {
-    private final String HOME_PAGE = "index.html";
-    private final String LOGIN_PAGE = "login.jsp";
-    private final String HOME_MEMBER_PAGE = "LoginController";
-    private final String REGISTER_PAGE = "CreateAccountServlet";
-    private final String LOGOUT_PAGE = "LogoutServlet";
+@WebServlet(name = "LogoutServlet", urlPatterns = {"/LogoutServlet"})
+public class LogoutServlet extends HttpServlet {
+
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String button = request.getParameter("btAction");
-        String url = HOME_PAGE;
+        String url = "login.jsp";
         try {
-            if(button==null){
-                url = LOGIN_PAGE;
+            HttpSession session = request.getSession(false);
+            if(session != null){
+                session.invalidate();
             }
-            else if(button.equals("Login")){
-                url = HOME_MEMBER_PAGE;
-            }
-            else if(button.equals("Create New Account")){
-                url = REGISTER_PAGE;
-            }
-            else if(button.equals("Logout")){
-                url = LOGOUT_PAGE;
+            
+            // Get cookie
+            Cookie[] cookies = request.getCookies();
+            if(cookies != null){
+                for(Cookie cookie : cookies){
+                    if("login_token".equals(cookie.getName())){ // find cookie have token
+                        // Delete cookie
+                        cookie.setMaxAge(0);
+                        response.addCookie(cookie);
+                        break;
+                    }
+                }
             }
         } finally {
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
+            response.sendRedirect(url);
         }
     }
 

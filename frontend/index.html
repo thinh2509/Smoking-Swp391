@@ -98,12 +98,13 @@
                                 </a>
                             </div> -->
                         <div class="inner-profile">
-                            <a href="#" class="icon-user">
+                            <a href="#" class="icon-user" id="userIcon">
                                 <i class="fa-solid fa-user"></i>
                             </a>
-                        </div>
-                        <div class="inner-notification">
-                            <a href="#"><i class="fa-solid fa-bell"></i></a>
+                            <div class="profile-dropdown-menu" id="profileDropdown">
+                                <a href="">Profile</a>
+                                <a href="">Logout</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -277,6 +278,22 @@
         </div>
     </footer>
     <!-- End Footer -->
+     <script>
+    const userIcon = document.getElementById("userIcon");
+    const dropdown = document.getElementById("profileDropdown");
+
+    userIcon.addEventListener("click", function (e) {
+        e.preventDefault();
+        dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+    });
+
+    // Ẩn dropdown khi bấm ngoài
+    document.addEventListener("click", function (e) {
+        if (!userIcon.contains(e.target) && !dropdown.contains(e.target)) {
+            dropdown.style.display = "none";
+        }
+    });
+</script>
 </body>
 
 </html>
